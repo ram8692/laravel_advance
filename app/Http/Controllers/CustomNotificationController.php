@@ -12,9 +12,13 @@ class CustomNotificationController extends Controller
     public function index(){
 
 
-        $user = User::find(1);
+        $user = User::get();
 
-        Notification::send($user,new WelcomeNotification);
+        foreach ($user as $value) {
+            Notification::send($value,new WelcomeNotification);
+        }
+
+        
         
         return 'notification2';
 
