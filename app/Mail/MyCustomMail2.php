@@ -12,15 +12,17 @@ class MyCustomMail2 extends Mailable
     use Queueable, SerializesModels;
 
     protected $dynamicData;
+    protected $dynamictemplate;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($dydata)
+    public function __construct($dydata,$dytemplate)
     {
         $this->dynamicData = $dydata; 
+        $this->dynamictemplate = $dytemplate;
     }
 
     /**
@@ -30,7 +32,7 @@ class MyCustomMail2 extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.my_custom_mail')
+        return $this->view($this->dynamictemplate)
                 ->with(['dynamicData' => $this->dynamicData]);
         //return $this->view('view.name');
     }

@@ -15,7 +15,10 @@ class MailTestController2 extends Controller
             'message' => 'Hello, this is a dynamic message!',
         ];
 
-        Mail::to('recipient@example.com')->send(new MyCustomMail2($dynamicData));
+        $dynamictemplate = 'emails.my_custom_mail3';
+
+
+        Mail::to('recipient@example.com')->send(new MyCustomMail2($dynamicData,$dynamictemplate));
 
         echo 'Email sent successfully!';
     }
