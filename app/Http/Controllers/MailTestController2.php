@@ -17,8 +17,25 @@ class MailTestController2 extends Controller
 
         $dynamictemplate = 'emails.my_custom_mail3';
 
+        $toRecipients = [
+            'ramgupta86928@gmail.com',
+            'ramgupta9137@gmail.com',
+            'ramg8692@gmail.com',
+        ];
+    
+        $ccRecipients = [
+            'ramlearn51@gmail.com',
+            'ramg8692@gmail.com',
+        ];
+    
+        $bccRecipients = [
+            'ramg8692@gmail.com',
+            'ramg8692@gmail.com',
+        ];
+    
 
-        Mail::to('recipient@example.com')->send(new MyCustomMail2($dynamicData,$dynamictemplate));
+
+        Mail::to($toRecipients)->cc($ccRecipients)->bcc($bccRecipients)->send(new MyCustomMail2($dynamicData,$dynamictemplate));
 
         echo 'Email sent successfully!';
     }

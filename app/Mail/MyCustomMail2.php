@@ -32,7 +32,9 @@ class MyCustomMail2 extends Mailable
      */
     public function build()
     {
-        return $this->view($this->dynamictemplate)
+        return $this->from('hello@example.com', 'Your Teacher')->view($this->dynamictemplate)
+                ->subject("subject test")
+                ->attach(public_path('/pathram/dummy.pdf'))
                 ->with(['dynamicData' => $this->dynamicData]);
         //return $this->view('view.name');
     }
