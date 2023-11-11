@@ -2,12 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Mail\MyCustomMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class MeraJob implements ShouldQueue
 {
@@ -30,6 +32,14 @@ class MeraJob implements ShouldQueue
      */
     public function handle()
     {
-        logger('Job processed!');
+        Log::info('MyMailJob is starting...');
+        $email = new MyCustomMail();
+
+        // Add logic to set recipient, subject, etc.
+        $email->to('ramgupta86928@gmail.com')->subject('My Subject');
+
+        // Dispatch the email
+        \Mail::send($email);
+        Log::info('MyMailJob has finished.');
     }
 }
