@@ -11,14 +11,15 @@ class WelcomeNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    protected $title;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->title = $data;
     }
 
     /**
@@ -41,7 +42,7 @@ class WelcomeNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
+                    ->line($this->title)
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
