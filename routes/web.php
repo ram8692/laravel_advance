@@ -20,6 +20,11 @@ Route::get('/', function () {
 
 Route::get('send',[CustomNotificationController::class,'index']);
 
+Route::get('notify',[CustomNotificationController::class,'notify']);
+Route::get('markasread/{id}',[CustomNotificationController::class,'markasread'])->name("markasread");
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
