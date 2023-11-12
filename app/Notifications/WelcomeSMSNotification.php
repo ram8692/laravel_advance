@@ -6,21 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class UserFollowNotification extends Notification
+class WelcomeSMSNotification extends Notification
 {
     use Queueable;
-protected $user;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -31,22 +30,28 @@ protected $user;
      */
     public function via($notifiable)
     {
-        return ['database','slack'];
+        return ['naxmo'];
     }
 
-    public function toSlack($notifiable){
-return (new SlackMessage)->content($this->user['name']."started following you");
-    }
+    public function toVonage(object $notifiable): VonageMessage
+{
+    return (new VonageMessage)
+                ->content('Your unicode message')
+                ->unicode();
+}
 
-    
 
-    
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
     public function toArray($notifiable)
     {
         return [
-            'user_id' => $this->user->id,
-            'name'=>$this->user->name,
-            'email'=>$this->user->email,
+            //
         ];
     }
 }

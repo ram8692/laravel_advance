@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Notifications\UserFollowNotification;
 use App\Notifications\WelcomeNotification;
+use App\Notifications\WelcomeSMSNotification;
 use Illuminate\Http\Request;
 use Notification;
 
@@ -42,6 +43,12 @@ class CustomNotificationController extends Controller
 //dd($id);
 auth()->user()->notifications()->where('id',$id)->update(['read_at'=>now()]);
         return redirect()->back();
+    }
+
+
+    public function sms(){
+        $user = User::first();
+        $user->notify(new WelcomeSMSNotification);
     }
 
 

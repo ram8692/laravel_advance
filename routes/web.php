@@ -23,6 +23,7 @@ Route::get('send',[CustomNotificationController::class,'index']);
 Route::get('notify',[CustomNotificationController::class,'notify']);
 Route::get('markasread/{id}',[CustomNotificationController::class,'markasread'])->name("markasread");
 
+Route::get('sms',[CustomNotificationController::class,'sms']);
 
 
 Route::get('/dashboard', function () {

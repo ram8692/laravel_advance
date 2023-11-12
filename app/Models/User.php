@@ -42,7 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function routeNotificationForSlack(){
-return 'https://hooks.slack.com/services/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';
-    }
+//     public function routeNotificationForSlack(){
+// return 'https://hooks.slack.com/services/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';
+//     }
+
+public function routeNotificationForNexmo($notification)
+{
+    return $this->phone_number;
+}
 }
