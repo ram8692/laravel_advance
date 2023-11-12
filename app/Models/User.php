@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function routeNotificationForSlack(){
+return 'https://hooks.slack.com/services/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';
+    }
 }

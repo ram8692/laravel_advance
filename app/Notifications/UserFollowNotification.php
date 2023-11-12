@@ -5,6 +5,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
 class UserFollowNotification extends Notification
@@ -29,7 +30,11 @@ protected $user;
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','slack'];
+    }
+
+    public function toSlack($notifiable){
+return (new SlackMessage)->content($this->user['name']."started following you");
     }
 
     
